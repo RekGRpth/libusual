@@ -123,6 +123,7 @@ static void report_last_result(struct PgSocket *db)
 	switch (PQresultStatus(res)) {
 	default:
 		log_error("%s: %s", PQdb(db->con), PQresultErrorMessage(res));
+		/* fallthrough */
 	case PGRES_COMMAND_OK:
 	case PGRES_TUPLES_OK:
 	case PGRES_COPY_OUT:
@@ -302,7 +303,7 @@ void pgs_free(struct PgSocket *db)
 {
 	if (db) {
 		pgs_disconnect(db);
-		free(db->connstr);
+		free((void *)db->connstr);
 		free(db);
 	}
 }
