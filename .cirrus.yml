@@ -70,6 +70,7 @@ task:
   name: Linux (Red Hat)
   container:
     matrix:
+      - image: rockylinux:9
       - image: rockylinux:8
       - image: centos:centos7
   setup_script:
@@ -111,7 +112,7 @@ task:
 task:
   name: FreeBSD
   freebsd_instance:
-    image_family: freebsd-13-0
+    image_family: freebsd-13-1
   setup_script:
     - pkg install -y autoconf automake gmake libevent libtool pkgconf
   env:
